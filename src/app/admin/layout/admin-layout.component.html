@@ -1,0 +1,19 @@
+<div class="navbar navbar-default">
+    <a class="navbar-brand" href="/">Shopping Site</a>
+    <ul class="nav navbar-nav">
+        <li>
+            <a [routerLink]="['/admin']">Dashboard</a>
+        </li>
+        <li>
+            <a [routerLink]="['/admin/category']">Categories</a>
+        </li>
+        <li>
+            <a [routerLink]="['/admin/product']">Products</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+    </ul>
+</div>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
