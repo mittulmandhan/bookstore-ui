@@ -1,1 +1,19 @@
-<p>public-layout works!</p>
+<div class="navbar navbar-default">
+    <a class="navbar-brand" href="/">Shopping Site</a>
+    <ul class="nav navbar-nav">
+        <li>
+            <a [routerLink]="['/']">Store</a>
+        </li>
+    </ul>
+    <ul class="nav navbar-nav pull-right">
+        <li>
+            <a [routerLink]="['/login']">Login</a>
+        </li>
+        <li>
+            <a [routerLink]="['/signup']">SignUp</a>
+        </li>
+    </ul>
+</div>
+<div class="container">
+    <router-outlet></router-outlet>
+</div>
