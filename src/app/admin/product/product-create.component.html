@@ -1,1 +1,73 @@
-<p>product-create works!</p>
+<h2>Create Product</h2>
+product-create works!
+<hr>
+<form class="form-horizontal" #form="ngForm" [formGroup]="productForm" (ngSubmit)="saveData(productForm)">
+    <div class="form-group">
+        <div class="col-sm-2">
+            <label>Category</label>
+        </div>
+        <div class="col-sm-10">
+            <select name="categoryId" class="form-control" formControlName='categoryId'> 
+        <option value="">- Select -</option>      
+        <option *ngFor="let item of categories" [value]= "item._id">
+          {{item.name}}
+        </option>
+      </select>
+            <div *ngIf="productForm.get('categoryId').errors && (productForm.get('categoryId').dirty || form.submitted)" class="text-danger">
+                <span [hidden]="!productForm.get('categoryId').required">
+          please select category
+        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2">
+            <label>Name</label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="name" formControlName='name'>
+            <div *ngIf="productForm.get('name').errors && (productForm.get('name').dirty || form.submitted)" class="text-danger">
+                <span [hidden]="!productForm.get('name').required">
+          please enter name
+        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2">
+            <label>Unit Price</label>
+        </div>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" name="unitPrice" formControlName='unitPrice'>
+            <div *ngIf="productForm.get('unitPrice').errors && (productForm.get('unitPrice').dirty || form.submitted)" class="text-danger">
+                <span [hidden]="!productForm.get('unitPrice').required">
+          please enter unitPrice
+        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-2">
+            <label>Image</label>
+        </div>
+        <div class="col-sm-10">
+            <p-fileUpload mode="basic" name="file" [url]="uploadUrl" accept="image/*" maxFileSize="1000000" (onUpload)="onUpload($event)" style="cursor:pointer"></p-fileUpload>
+
+            <div *ngIf="productForm.get('file').errors && (productForm.get('file').dirty || form.submitted)" class="text-danger">
+                <span [hidden]="!productForm.get('file').required">
+          please upload photo
+        </span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="col-sm-10 col-sm-offset-2">
+            <button type="submit" class="btn btn-primary">Create</button>
+        </div>
+    </div>
+</form>
+<style>
+    input[type=file] {
+        display: inline !important;
+    }
+</style>
