@@ -4,12 +4,14 @@ import { PublicLayoutComponent } from './layout/public-layout.component';
 import { LoginComponent } from './account/login.component';
 import { SignupComponent } from './account/signup.component';
 import { StoreComponent } from './store/store.component';
+import { UnauthorizeComponent } from './unauthorize/unauthorize.component';
 
 const routes: Routes = [
     {
         path: '', component: PublicLayoutComponent, children: [
             { path: '', component: StoreComponent },
             { path: 'login', component: LoginComponent },
+            { path: 'unauthorize', component: UnauthorizeComponent },
             { path: 'signup', component: SignupComponent }
         ]
     }
@@ -24,6 +26,7 @@ export class PublicRoutingModule {}
 export const routedComponents = [LoginComponent,
     SignupComponent,
     PublicLayoutComponent,
-    StoreComponent ];
+    StoreComponent,
+    UnauthorizeComponent ];
 
 
