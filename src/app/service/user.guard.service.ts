@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { CanActivate, Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
-@Injectable()
+@Injectable({providedIn: 'root'})
 export class UserAuthGuard implements CanActivate {
 
     constructor(private authService: AuthService, private router: Router) { }
@@ -14,7 +14,7 @@ export class UserAuthGuard implements CanActivate {
     } else if (this.authService.user.roles.indexOf('User') > -1) {
       return true;
     } else {
-      this.router.navigate(['unauthorize']);
+      this.router.navigate(['/unauthorize']);
       return false;
     }
   }
