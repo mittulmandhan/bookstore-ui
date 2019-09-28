@@ -1,7 +1,6 @@
 <h2>My Store</h2>
-store works!
-<table class="table table-bordered table-hover">
-    </p>
+<hr>
+<table class="table table-dark">
     <thead>
         <tr>
             <th>SNo</th>
@@ -18,7 +17,7 @@ store works!
             <td><img [src]="item.file" [alt]="item.name" height="200" /></td>
             <td>{{item.unitPrice}}</td>
             <td>
-                <button type="button" class="btn btn-danger" (click)="cart.addToCart(item._id,item.name,item.unitPrice,1)">Add To Cart</button>
+                <button type="button" class="btn btn-danger" (click)="cart.addToCart(item.id,item.name,item.unitPrice,1)">Add To Cart</button>
             </td>
         </tr>
     </tbody>

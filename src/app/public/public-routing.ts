@@ -29,6 +29,6 @@ export const routedComponents = [LoginComponent,
     SignupComponent,
     PublicLayoutComponent,
     StoreComponent,
-    UnauthorizeComponent,CartComponent ];
+    UnauthorizeComponent, CartComponent ];
 
 

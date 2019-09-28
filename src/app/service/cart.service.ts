@@ -12,7 +12,7 @@ declare const localStorage: any;
 })
 export class CartService {
   id: number;
-  items: Array<CartItem>;
+  items: CartItem[];
   total: number;
   totalItems: number;
   userId: string;
@@ -28,7 +28,7 @@ export class CartService {
 
   loadCart() {
       const items = localStorage.getItem(this.cartName);
-      if (items !== undefined &&  items !== '') {
+      if (items !== undefined && items !== null &&  items !== '') {
           this.items = JSON.parse(items);
           this.calculateCart();
       }
@@ -39,7 +39,7 @@ export class CartService {
       localStorage.setItem(this.cartName, '');
       this.totalItems = 0;
       this.total = 0;
-  };
+  }
 
   saveCart() {
           localStorage.setItem(this.cartName, JSON.stringify(this.items));
@@ -48,10 +48,14 @@ export class CartService {
   calculateCart() {
       let count = 0;
       let price = 0;
-      this.items.forEach(item => {
-          count += item.quantity;
-          price += item.total = item.quantity * item.unitPrice;
-      });
+      // tslint:disable-next-line:prefer-for-of
+      if (this.items !== undefined && this.items != null && this.items.length > 0) {
+            for (let i = 0; i < this.items.length; i++) {
+                const item = this.items[i];
+                count += item.quantity;
+                price += this.items[i].total = item.quantity * item.unitPrice;
+            }
+    }
       this.totalItems = count;
       this.total = price;
   }
@@ -103,7 +107,7 @@ export class CartService {
           url: environment.apiAddress,
           options: {
               key: environment.key,
-              salt:environment.salt,
+              salt: environment.salt,
               txnid: (Math.random() * 10000000000).toFixed(0), // with 10 numbers
               amount: this.total,
               productinfo: this.cartName + '_' + this.total,
@@ -119,8 +123,8 @@ export class CartService {
           }
       };
 
-      const str = params.options.key + '|' + params.options.txnid + '|' + params.options.amount + 
-      '|' + params.options.productinfo + '|' + params.options.firstname + '|' + params.options.email + 
+      const str = params.options.key + '|' + params.options.txnid + '|' + params.options.amount +
+      '|' + params.options.productinfo + '|' + params.options.firstname + '|' + params.options.email +
       '|' + params.options.udf1 + '|' + params.options.udf2 + '|||||||||' + params.options.salt;
 
       // console.log(str);

@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../service/cart.service';
 import { AuthService } from '../../service/auth.service';
 import { Router } from '@angular/router';
+import { StoreService } from 'src/app/service/store.service';
 
 @Component({
   selector: 'cart',
-  templateUrl: './cart.component.html',
-  styles: []
+  templateUrl: './cart.component.html'
 })
 export class CartComponent implements OnInit {
 
