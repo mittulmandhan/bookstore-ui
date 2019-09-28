@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { CategoryService } from '../service/category.service';
+import { Router, ActivatedRoute } from '@angular/router';
+import { FormBuilder, FormGroup, Validators, NgForm } from '@angular/forms';
 
 @Component({
   selector: 'category-create',
@@ -6,9 +9,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CategoryCreateComponent implements OnInit {
 
-  constructor() { }
+  categoryForm: FormGroup;
+
+  constructor(formbuilder: FormBuilder, private router: Router, private route: ActivatedRoute, private categoryService: CategoryService) {
+    this.categoryForm = formbuilder.group({
+      name: [null, [Validators.required]],
+      description: [null, [Validators.required]],
+    });
+  }
+
 
   ngOnInit() {
+
   }
+
+saveData(form: NgForm) {
+    if (form.valid) {
+      this.categoryService
+        .add(form.value)
+        .subscribe((data: any) => {
+          this.router.navigate(['/admin/category']);
+        });
+    }
+  }
+
 
 }

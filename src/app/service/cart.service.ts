@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { CartItem } from '../models/CartItem';
 import { environment } from '../../environments/environment';
-import { User } from "../models/user";
+import { User } from '../models/user';
 
 declare const $: any;
 declare const CryptoJS: any;
@@ -15,7 +15,7 @@ export class CartService {
   items: Array<CartItem>;
   total: number;
   totalItems: number;
-  userId: number;
+  userId: string;
   createdDate;
   cartName: string;
 

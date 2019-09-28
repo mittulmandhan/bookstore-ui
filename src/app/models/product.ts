@@ -4,6 +4,7 @@ export class Product {
     unitPrice: number;
     file: string;
     categoryId: string;
+    category: any;
     createdDate: any;
     updatedDate: any;
     costructor() { }

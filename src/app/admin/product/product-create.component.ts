@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { ProductService } from '../service/product.service';
 import { environment } from '../../../environments/environment';
 import { CategoryService } from '../service/category.service';
+import { Category } from "../../models/category";
+import { Product } from "../../models/product";
 
 @Component({
   selector: 'product-create',
@@ -12,21 +14,19 @@ import { CategoryService } from '../service/category.service';
 })
 export class ProductCreateComponent implements OnInit {
 
-  categories: any[] = [];
+
+  categories: Category[] = [];
   uploadUrl: string;
   productForm: FormGroup;
 
-
-  productService: ProductService;
-  categoryService: CategoryService;
-
-  constructor(formbuilder: FormBuilder, private router: Router, productService: ProductService, categoryService: CategoryService) {
+  constructor(formbuilder: FormBuilder, private router: Router,
+            private productService: ProductService, private categoryService: CategoryService) {
     this.uploadUrl = environment.apiAddress + '/file';
 
     this.productForm = formbuilder.group({
       name: [null, [Validators.required]],
       unitPrice: [null, [Validators.required]],
-      file: [null, [Validators.required]],
+      // file: [null, [Validators.required]],
       categoryId: ['', [Validators.required]]
     });
   }
@@ -49,9 +49,11 @@ export class ProductCreateComponent implements OnInit {
 
 saveData(form: NgForm) {
     if (form.valid) {
+      const data: Product = form.value;
+      data.category = this.categories.filter((e: Category) => e.id == data.categoryId)[0];
       this.productService
-        .add(form.value)
-        .subscribe((data: any) => {
+        .add(data)
+        .subscribe((res: any) => {
           this.router.navigate(['/admin/product']);
         });
     }
