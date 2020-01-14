@@ -1,6 +1,6 @@
 export class User {
     isAuth = false;
-    userId: number;
+    userId: string;
     email: string;
     password: string;
     name: string;
